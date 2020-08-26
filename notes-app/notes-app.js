@@ -28,7 +28,13 @@ const notes = [{
     body: 'For Sure'
 }]
 
-document.querySelector('button').addEventListener('click', function(e) {
-    e.target.textContent = 'Omg! You just clicked it'
-    console.log('Button Clicked')
+document.querySelector('#create-note').addEventListener('click', function(e) {
+    e.target.textContent = 'Omg! You just clicked create-note'
+    console.log('Create-note Button Clicked')
+})
+
+document.querySelector('#remove-all').addEventListener('click', function(e) {
+    document.querySelectorAll('.note').forEach(function(note) {
+        note.remove()
+    })
 })
