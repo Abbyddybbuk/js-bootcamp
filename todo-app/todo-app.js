@@ -15,17 +15,23 @@ const todos = [{
     completed: false
 }]
 
-// const ps = document.querySelectorAll('p')
+const renderedNotes = function(todos, searchValue) {
+    const filteredNotes = todos.filter(function(todo) {
+        return todo.task.toLowerCase().includes(searchValue.toLowerCase())
+    })
 
-// ps.forEach(function(p) {
-//     console.log(p.textContent)
-//     if (p.textContent.includes('Do')) {
-//         p.remove()
-//     }
-// })
+    document.querySelector('#notes').innerHTML = ''
 
-todos.forEach(function(todo) {
-    let newParagraph = document.createElement('p')
-    newParagraph.textContent = todo.task
-    document.querySelector('body').appendChild(newParagraph)
+    filteredNotes.forEach(function (todo) {
+        let notesFl = document.createElement('p')
+        notesFl.textContent = todo.task
+        document.querySelector('#notes').appendChild(notesFl)
+    })
+}
+
+let searchText = ''
+renderedNotes(todos, searchText)
+
+document.querySelector('#new-todo').addEventListener('input', function(e) {
+    renderedNotes(todos, e.target.value)
 })
