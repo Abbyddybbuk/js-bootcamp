@@ -33,12 +33,8 @@ document.querySelector('#create-note').addEventListener('click', function(e) {
     console.log('Create-note Button Clicked')
 })
 
-document.querySelector('#remove-all').addEventListener('click', function(e) {
-    document.querySelectorAll('.note').forEach(function(note) {
-        note.remove()
-    })
-})
-
-document.querySelector('#new-todo').addEventListener('input', function(e) {
-    console.log(e.target.value)
+document.querySelector('#name-form').addEventListener('submit', function(e) {
+    e.preventDefault()
+    console.log(e.target.elements.firstName.value)
+    e.target.elements.firstName.value = ''
 })

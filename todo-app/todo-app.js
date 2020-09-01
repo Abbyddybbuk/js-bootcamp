@@ -32,6 +32,26 @@ const renderedNotes = function(todos, searchValue) {
 let searchText = ''
 renderedNotes(todos, searchText)
 
-document.querySelector('#new-todo').addEventListener('input', function(e) {
-    renderedNotes(todos, e.target.value)
+const addNewTask = function(newTask, status) {
+    let newTodo = {
+        task: newTask,
+        completed: status
+    }
+
+    todos.push(newTodo)
+}
+
+// document.querySelector('#new-todo').addEventListener('input', function(e) {
+//     renderedNotes(todos, e.target.value)
+// })
+
+document.querySelector('#todo-form').addEventListener('submit', function(e) {    
+    e.preventDefault()
+    addNewTask(e.target.elements.newTodo.value, false)
+    console.log(e.target.elements.newTodo.value)
+    e.target.elements.newTodo.value = ''
+
+    let initialValue = ''
+    renderedNotes(todos, initialValue)
+    
 })
