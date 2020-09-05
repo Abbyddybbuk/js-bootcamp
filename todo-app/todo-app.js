@@ -1,16 +1,13 @@
 const todos = getSavedTodos()
 
-let searchText = ''
-renderedNotes(todos, searchText)
-
 const addNewTask = function(newTask, status) {
     let newTodo = {
+        id: uuidv4(),
         task: newTask,
         completed: status
     }
 
     todos.push(newTodo)
-    // localStorage.setItem('todo', JSON.stringify(todos))
     saveTodo(todos)
 }
 
@@ -33,10 +30,6 @@ const completedTodos = function(todos, status) {
     })   
 }
 
-// document.querySelector('#new-todo').addEventListener('input', function(e) {
-//     renderedNotes(todos, e.target.value)
-// })
-
 const fetchDbTodos = function(key) {
     let todoDbJSON = localStorage.getItem(key)    
     let todoObject = JSON.parse(todoDbJSON)
@@ -53,10 +46,9 @@ const fetchDbTodos = function(key) {
 document.querySelector('#todo-form').addEventListener('submit', function(e) {    
     e.preventDefault()
     addNewTask(e.target.elements.newTodo.value, false)
-    console.log(e.target.elements.newTodo.value)
     e.target.elements.newTodo.value = ''
 
-    fetchDbTodos('todo')
+    // fetchDbTodos('todo')
     generateSummaryDOM()
 })
     

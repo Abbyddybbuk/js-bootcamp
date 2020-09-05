@@ -1,6 +1,10 @@
 const getSavedTodos = function() {
     let todoJSON = localStorage.getItem('todo')
-    return JSON.parse(todoJSON)
+    if (todoJSON === null) {
+        return []
+    } else {
+        return JSON.parse(todoJSON)
+    }    
 }
 
 const saveTodo = function(todos) {
@@ -19,7 +23,18 @@ const renderedNotes = function(todos, searchValue) {
     })
 }
 
+let removeTodo = function(id) {
+   const todoIndex = todos.findIndex(function(todo) {
+       return todo.id === id
+   })
+
+   if (todoIndex > -1) {
+       todos.splice(todoIndex, 1)
+   }
+}
+
 const createPElement = function(todo) {
+    
     let noteDiv= document.createElement('div')
     let textSpan = document.createElement('span')
     let checkbox = document.createElement('input')
@@ -35,6 +50,13 @@ const createPElement = function(todo) {
     // Add Remove Button to Div
     let removeButton = document.createElement('button')
     removeButton.textContent = 'x'
+    removeButton.addEventListener('click', function() {
+        removeTodo(todo.id)
+        saveTodo(todos)
+        let searchText = ''
+        renderedNotes(todos, searchText)
+    })
+
     noteDiv.appendChild(removeButton)
 
     document.querySelector('#todos').appendChild(noteDiv)
@@ -44,17 +66,17 @@ const generateSummaryDOM = function() {
     let todoJSON = localStorage.getItem('todo')
     let todoObject = JSON.parse(todoJSON)
 
-    const uncompletedTodo = todoObject.filter(function(todo) {
+    const uncompletedTodo = todoObject.filter(function(todo) {        
         return todo.completed === false
     })
     
     let count = 0
-    uncompletedTodo.forEach(function(unTodo) {
+    uncompletedTodo.forEach(function(unTodo) {        
         count++
     })
 
-    const textToBeShown = `You have ${count} companies to look for`
-    let noteFl = document.createElement('p')
-    noteFl.textContent = textToBeShown
-    document.querySelector('#todos').appendChild(noteFl)
+    document.querySelector('#todos').innerHTML = ''
+    uncompletedTodo.forEach(function(todo) {
+        createPElement(todo)
+    })
 }
