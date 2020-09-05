@@ -33,8 +33,27 @@ document.querySelector('#create-note').addEventListener('click', function(e) {
     console.log('Create-note Button Clicked')
 })
 
-document.querySelector('#name-form').addEventListener('submit', function(e) {
-    e.preventDefault()
-    console.log(e.target.elements.firstName.value)
-    e.target.elements.firstName.value = ''
+document.querySelector('#filter-by').addEventListener('change', function(e) {
+    console.log(e.target.value)
 })
+
+const user = {
+    name: 'Abhijeet',
+    age: 35
+}
+
+// const userJSON = JSON.stringify(user)
+// console.log(userJSON)
+
+// localStorage.setItem('user', userJSON)
+
+const userJSON = localStorage.getItem('user')
+console.log(JSON.parse(userJSON))
+
+localStorage.removeItem('user')
+
+// document.querySelector('#name-form').addEventListener('submit', function(e) {
+//     e.preventDefault()
+//     console.log(e.target.elements.firstName.value)
+//     e.target.elements.firstName.value = ''
+// })
