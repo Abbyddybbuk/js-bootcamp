@@ -33,12 +33,46 @@ let removeTodo = function(id) {
    }
 }
 
+let updateAction = function(id) {
+    let todoFound = todos.find(function(todo) {
+         return todo.id === id
+    })
+    
+    if(todoFound !== undefined) {
+        return todoFound
+    } else {
+        return undefined
+    }
+}
+
 const createPElement = function(todo) {
     
     let noteDiv= document.createElement('div')
     let textSpan = document.createElement('span')
     let checkbox = document.createElement('input')
     checkbox.setAttribute('type', 'checkbox')    
+    
+    if (todo.completed) {
+      checkbox.checked = true
+    } else {
+      checkbox.checked = false
+    }
+
+    checkbox.addEventListener('change', function() {
+        let finalTodo = []
+        let tempTodo = updateAction(todo.id)
+        if (checkbox.checked === true) {
+          tempTodo.completed = true
+        } else {
+           tempTodo.completed = false
+        }
+       
+       finalTodo.push(tempTodo)
+       saveTodo(tempTodo)       
+    //    renderedNotes(getSavedTodos(), searchText)
+    })
+    
+    // debugger
     
     // Append Checbox to div
     noteDiv.appendChild(checkbox)
@@ -66,17 +100,17 @@ const generateSummaryDOM = function() {
     let todoJSON = localStorage.getItem('todo')
     let todoObject = JSON.parse(todoJSON)
 
-    const uncompletedTodo = todoObject.filter(function(todo) {        
-        return todo.completed === false
-    })
+    // const uncompletedTodo = todoObject.filter(function(todo) {        
+    //     return todo.completed === false
+    // })
     
-    let count = 0
-    uncompletedTodo.forEach(function(unTodo) {        
-        count++
-    })
+    // let count = 0
+    // uncompletedTodo.forEach(function(unTodo) {        
+    //     count++
+    // })
 
     document.querySelector('#todos').innerHTML = ''
-    uncompletedTodo.forEach(function(todo) {
+    todoObject.forEach(function(todo) {
         createPElement(todo)
     })
 }
