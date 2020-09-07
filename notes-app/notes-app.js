@@ -1,59 +1,35 @@
-// Query and remove
-// const p = document.querySelector('p')
-// p.remove()
+let notes = getSavedNotes()
 
-//Query All and Remove
-// const ps = document.querySelectorAll('p')
+const filters = {
+    searchText: ''
+}
 
-// ps.forEach(function(p) {
-//     console.log(p.textContent)
-//     p.textContent = '**Balle*****Balle*******Balle*********'
-//     // p.remove()
-// })
+renderNotes(notes, filters)
 
-// const newParagraph = document.createElement('p')
-// newParagraph.textContent = 'Good Job! You have a added a new paragraph from JavaScript'
-// document.querySelector('body').appendChild(newParagraph)
-const notes = [{
-    title: 'My Next Trip',
-    body: 'I want to travel to Norway'
-}, {
-    title: 'Habbits to work on',
-    body: 'Do Suryanamaskar daily'
-}, {
-    title: 'Carry on with you learning',
-    body: 'On Track'
-}, {
-    title: 'Good times are ahead!',
-    body: 'For Sure'
-}]
-
-document.querySelector('#create-note').addEventListener('click', function(e) {
-    e.target.textContent = 'Omg! You just clicked create-note'
-    console.log('Create-note Button Clicked')
+document.querySelector('#create-note').addEventListener('click', function (e) {
+    const id = uuidv4()
+    notes.push({
+        id: id,
+        title: '',
+        body: ''
+    })
+    saveNotes(notes)
+    // renderNotes(notes, filters)
+    location.assign(`/edit.html#${id}`)
 })
 
-document.querySelector('#filter-by').addEventListener('change', function(e) {
+document.querySelector('#search-text').addEventListener('input', function (e) {
+    filters.searchText = e.target.value
+    renderNotes(notes, filters)
+})
+
+document.querySelector('#filter-by').addEventListener('change', function (e) {
     console.log(e.target.value)
 })
 
-const user = {
-    name: 'Abhijeet',
-    age: 35
-}
-
-// const userJSON = JSON.stringify(user)
-// console.log(userJSON)
-
-// localStorage.setItem('user', userJSON)
-
-const userJSON = localStorage.getItem('user')
-console.log(JSON.parse(userJSON))
-
-localStorage.removeItem('user')
-
-// document.querySelector('#name-form').addEventListener('submit', function(e) {
-//     e.preventDefault()
-//     console.log(e.target.elements.firstName.value)
-//     e.target.elements.firstName.value = ''
-// })
+window.addEventListener('storage', function(e) {
+    if (e.key === 'notes') {
+        notes = JSON.parse(e.newValue)
+        renderNotes(notes, filters)
+    }
+})
