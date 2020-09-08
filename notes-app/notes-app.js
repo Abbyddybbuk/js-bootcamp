@@ -33,7 +33,7 @@ document.querySelector('#filter-by').addEventListener('change', function (e) {
     renderNotes(notes, filters)
 })
 
-window.addEventListener('storage', function(e) {
+window.addEventListener('storage', (e) => {
     if (e.key === 'notes') {
         notes = JSON.parse(e.newValue)
         renderNotes(notes, filters)
