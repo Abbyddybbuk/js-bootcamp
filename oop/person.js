@@ -24,34 +24,47 @@ class Person {
     this.lastName = names[1]
    }
 }
-// const myPerson = new PersonClass('Abhijeet', 'Kulshreshtha', 35, ['Driving', 'Coding'])
-// console.log(myPerson.getBio())
 
-// const Person = function(firstName, lastName, age, likes = []) {
-//     this.firstName = firstName
-//     this.lastName = lastName
-//     this.age = age
-//     this.likes = likes
-// }
 
-// Person.prototype.getBio = function() {
-//     let bio = `${this.firstName} is ${this.age}.`
+class Employee extends Person {
+     constructor(firstName, lastName, age, position, likes) {
+        super(firstName, lastName, age, likes)
+        this.position = position
+     }
 
-//     this.likes.forEach((like) => {
-//        bio = bio + ` ${this.firstName} likes ${like}.`
-//     })
+     getBio() {
+         return `${this.firstName} ${this.lastName} is a ${this.position}`
+     }
 
-//     return bio
-// }
-
-// Person.prototype.setName = function(fullName) {
-//     const names = fullName.split(' ')
-//     this.firstName = names[0]
-//     this.lastName = names[1]
-// }
-
-const me = new Person('Abhijeet', 'Kulshreshtha', 35, ['Driving', 'Coding'])
+     getYearsLeft() {
+         return 65 - this.age
+     }
+}
+const me = new Employee('Abhijeet', 'Kulshreshtha', 35, 'Associate Development Architect', ['Driving', 'Coding'])
+me.setName('Ankur Kulshreshtha')
 console.log(me.getBio())
+console.log(me.getYearsLeft())
 
-const person2 = new Person('Kanupriya', 'Saxena', 33)
-console.log(person2.getBio())
+class Student extends Person {
+    constructor(firstName, lastName, age, grade, likes) {
+        super(firstName, lastName, age, likes)
+        this.grade = grade
+    }
+
+    getBio() {
+      return this.grade >= 70 ? `${this.firstName} has passed the exam` : `${this.firstName} has failed the exam`      
+    }
+
+    updateGrade(marks) {
+        this.grade = this.grade + marks
+        return this.grade
+    }
+}
+
+const student = new Student('Abhijeet', 'Kulshreshtha', 35, 89, ['Driving', 'Coding'])
+console.log(student.getBio())
+student.updateGrade(-20)
+console.log(student.getBio())
+
+
+
