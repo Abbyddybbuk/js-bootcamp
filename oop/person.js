@@ -1,3 +1,4 @@
+//Prototypal Inheritance
 const Person = function(firstName, lastName, age, likes = []) {
     this.firstName = firstName
     this.lastName = lastName
@@ -22,7 +23,9 @@ Person.prototype.setName = function(fullName) {
 }
 
 const me = new Person('Abhijeet', 'Kulshreshtha', 35, ['Driving', 'Coding'])
-// me.setName('Abhishek Bachchan')
+me.getBio = function() {
+    return 'This is fake!'
+}
 console.log(me.getBio())
 
 const person2 = new Person('Kanupriya', 'Saxena', 33)
