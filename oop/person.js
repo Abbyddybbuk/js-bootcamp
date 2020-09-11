@@ -18,10 +18,14 @@ class Person {
     return bio       
    }
 
-   setName(fullName) {
+   set fullName(fullName) {
     const names = fullName.split(' ')
     this.firstName = names[0]
     this.lastName = names[1]
+   }
+
+   get fullName() {
+       return `${this.firstName} ${this.lastName}`
    }
 }
 
@@ -33,17 +37,17 @@ class Employee extends Person {
      }
 
      getBio() {
-         return `${this.firstName} ${this.lastName} is a ${this.position}`
+         return `${this.fullName} is a ${this.position}`
      }
 
      getYearsLeft() {
          return 65 - this.age
      }
 }
-const me = new Employee('Abhijeet', 'Kulshreshtha', 35, 'Associate Development Architect', ['Driving', 'Coding'])
-me.setName('Ankur Kulshreshtha')
-console.log(me.getBio())
-console.log(me.getYearsLeft())
+// const me = new Employee('Abhijeet', 'Kulshreshtha', 35, 'Associate Development Architect', ['Driving', 'Coding'])
+// me.setName('Ankur Kulshreshtha')
+// console.log(me.getBio())
+// console.log(me.getYearsLeft())
 
 class Student extends Person {
     constructor(firstName, lastName, age, grade, likes) {
@@ -61,10 +65,15 @@ class Student extends Person {
     }
 }
 
-const student = new Student('Abhijeet', 'Kulshreshtha', 35, 89, ['Driving', 'Coding'])
-console.log(student.getBio())
-student.updateGrade(-20)
-console.log(student.getBio())
+// const student = new Student('Abhijeet', 'Kulshreshtha', 35, 89, ['Driving', 'Coding'])
+// student.fullName = 'Abby Kuls'
+// console.log(student.getBio())
+// student.updateGrade(-20)
+// console.log(student.getBio())
+
+const emp = new Employee('Abhijeet', 'Kulshreshtha', 35, 'Architect', ['Driving', 'Coding'])
+// emp.fullName = 'Abby Kuls'
+console.log(emp.getBio())
 
 
 
