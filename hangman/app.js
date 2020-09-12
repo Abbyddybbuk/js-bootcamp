@@ -20,13 +20,13 @@ window.addEventListener('keypress', (e) => {
 //     }
 // })
 
-// getPuzzle((error, puzzle) => {
-//     if (error) {
-//         console.log(`Error ${error}`)
-//     } else {
-//         console.log(puzzle)
-//     }
-// })
+getPuzzle((error, puzzle) => {
+    if (error) {
+        console.log(`Error ${error}`)
+    } else {
+        console.log(puzzle)
+    }
+})
 
 // Make HTTP Request
 const countryCode = 'IN'
