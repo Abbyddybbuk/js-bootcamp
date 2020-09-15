@@ -20,24 +20,37 @@ window.addEventListener('keypress', (e) => {
 //     }
 // })
 
-getPuzzle((error, puzzle) => {
-    if (error) {
-        console.log(`Error ${error}`)
-    } else {
-        console.log(puzzle)
-    }
+// getPuzzle((error, puzzle) => {
+//     if (error) {
+//         console.log(`Error ${error}`)
+//     } else {
+//         console.log(puzzle)
+//     }
+// })
+
+getPuzzle('2').then((puzzle) => {
+    console.log(puzzle)
+}, (error) => {
+    console.log(`Error! ${error}`)
 })
+
 
 // Make HTTP Request
 const countryCode = 'IN'
 
-getCountry(countryCode, (error, myCountry) => {
-    if (error) {
-        console.log(`Error ${error}`)
-    } else {
-        console.log(`Country Name: ${myCountry.name}`)
-    }
+getCountry(countryCode).then((myCountry) => {
+    console.log(`Country Name: ${myCountry.name}`)
+}, (error) => {
+    console.log(`Error! ${error}`)
 })
+
+// getCountry(countryCode, (error, myCountry) => {
+//     if (error) {
+//         console.log(`Error ${error}`)
+//     } else {
+//         console.log(`Country Name: ${myCountry.name}`)
+//     }
+// })
 
 
 
