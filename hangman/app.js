@@ -6,10 +6,10 @@ puzzleEl.textContent = game1.puzzle
 guessesEl.textContent = game1.statusMessage
 
 window.addEventListener('keypress', (e) => {
-    const guess = String.fromCharCode(e.charCode)
-    game1.makeGuess(guess)
-    puzzleEl.textContent = game1.puzzle
-    guessesEl.textContent = game1.statusMessage
+   const guess = String.fromCharCode(e.charCode)
+   game1.makeGuess(guess)
+   puzzleEl.textContent = game1.puzzle
+   guessesEl.textContent = game1.statusMessage
 })
 
 // getPuzzle( function(error, puzzle) {
@@ -28,11 +28,11 @@ window.addEventListener('keypress', (e) => {
 //     }
 // })
 
-getPuzzle('2').then((puzzle) => {
-    console.log(puzzle)
-}, (error) => {
-    console.log(`Error! ${error}`)
-})
+// getPuzzle('2').then((data) => {
+//    console.log(data.puzzle)
+// }, (error) => {
+//    console.log(`Error! ${error}`)
+// })
 
 
 // Make HTTP Request
@@ -40,7 +40,7 @@ const countryCode = 'IN'
 
 getCountry(countryCode).then((myCountry) => {
     console.log(`Country Name: ${myCountry.name}`)
-}, (error) => {
+}).catch((error) => {
     console.log(`Error! ${error}`)
 })
 
@@ -52,5 +52,16 @@ getCountry(countryCode).then((myCountry) => {
 //     }
 // })
 
+// fetch('http://puzzle.mead.io/puzzle', {}).then((response)=> {
+//    if (response.status === 200 ) {
+//      return response.json()
+//    } else {
+//        throw new Error('Unable to fetch data')
+//    }
+// }).then((data)=> {
+//    console.log(data.puzzle)
+// }).catch((error) => {
+//    console.log(error)
+// })
 
 
